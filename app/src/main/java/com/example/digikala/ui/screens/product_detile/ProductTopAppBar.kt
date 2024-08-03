@@ -1,5 +1,7 @@
 package com.example.digikala.ui.screens.product_detile
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
@@ -29,18 +31,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.digikala.R
+import com.example.digikala.data.model.product_detail.ProductDetail
+import com.example.digikala.navigation.ScreenPage
 import com.example.digikala.ui.theme.darkText
 import com.example.digikala.ui.theme.spacing
+import com.example.digikala.util.DigitHelper
+import com.google.gson.Gson
 
 @Composable
 fun ProductTopAppBar(
-    navController: NavController
+    navController: NavController, item: ProductDetail
 ) {
     var checkState by remember {
         mutableStateOf(false)
@@ -48,7 +55,9 @@ fun ProductTopAppBar(
     var expandad by remember {
         mutableStateOf(false)
     }
+    val jsonPriceString = Gson().toJson(item.priceList)
 
+    val context= LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -78,6 +87,7 @@ fun ProductTopAppBar(
         ) {
             IconButton(
                 onClick = {
+                    navController.navigate(ScreenPage.Basket.route)
                 }) {
                 Icon(
                     painter = painterResource(id = R.drawable.basket),
@@ -117,11 +127,8 @@ fun ProductTopAppBar(
             ) {
                 DropdownMenuItem(
                     onClick = {
-//                        val priceListString = Gson().toJson(priceList)
-//                        expandad = false
-//                        navController.navigate(
-//                            ScreenPage.ProductPriceChart.route + "?jsonString=${priceListString}"
-//                        )
+                        expandad = false
+                        navController.navigate(ScreenPage.ProductPriceChartScreen.route + "?jsonString=${jsonPriceString}")
                     }
                 ) {
                     Row(
@@ -151,6 +158,8 @@ fun ProductTopAppBar(
                 DropdownMenuItem(
                     onClick = {
                         expandad = false
+                        shareAppPlayStoreUrl(context,item.name!!,
+                            DigitHelper.digitByLocateAndSeparator(item.price!!.toString()),"https://www.digikala.com/")
                     }
                 ) {
                     Row(
@@ -180,4 +189,17 @@ fun ProductTopAppBar(
             }
         }
     }
+}
+
+fun shareAppPlayStoreUrl(context: Context, nameProduct: String, priceProduct: String, url: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(
+            Intent.EXTRA_TEXT,
+            "$nameProduct  با قیمت باور نکردنی $priceProduct تومان فقط در فروشگاه زیر \n $url"
+        )
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, "send too ...")
+    context.startActivity(shareIntent)
 }

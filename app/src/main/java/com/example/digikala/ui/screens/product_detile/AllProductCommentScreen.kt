@@ -3,6 +3,7 @@ package com.example.digikala.ui.screens.product_detile
 import android.app.LocaleConfig
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,7 +45,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import com.example.digikala.ui.theme.spacing
 import com.example.digikala.util.DigitHelper
 import com.example.digikala.viweModels.ProductDetailViewModel
@@ -68,7 +70,7 @@ fun AllProductCommentScreen(
     viewModel: ProductDetailViewModel = hiltViewModel()
 ) {
 
-    LaunchedEffect(true){
+    LaunchedEffect(true) {
         viewModel.getCommentList(productId)
 
     }
@@ -104,12 +106,18 @@ fun AllProductCommentScreen(
         }
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(commentList) {
-
-                    if (it != null) {
-                        CommentItem(it)
-                    }
+                //paging3
+                items(count = commentList.itemCount,
+                    key = commentList.itemKey { it._id },
+                    contentType = commentList.itemContentType { "comment" }
+                ) {
+                    CommentItem(commentList[it]!!)
                 }
+
+                //paging1
+//                items(commentList) {
+//                        CommentItem(it!!)
+//                }
                 commentList.apply {
                     when {
                         loadState.refresh is LoadState.Loading -> {

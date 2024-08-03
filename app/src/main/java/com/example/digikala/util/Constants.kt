@@ -18,6 +18,7 @@ object Constants {
     const val KEY = BuildConfig.KEY
     const val IV = BuildConfig.IV
     const val SHOPPING_CART_TABLE = "shopping_cart"
+    const val FAVORITE_LIST_TABLE = "favorite_list_table"
     const val DATABASE_NAME = "digikala_db"
 
     const val DIGIJET_URL = "https://www.digikalajet.com/user/address"

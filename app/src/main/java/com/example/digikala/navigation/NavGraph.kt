@@ -19,6 +19,7 @@ import com.example.digikala.ui.screens.product_detile.NewCommentScreen
 import com.example.digikala.ui.screens.product_detile.ProductDescriptionScreen
 import com.example.digikala.ui.screens.product_detile.ProductDetailScreen
 import com.example.digikala.ui.screens.product_detile.ProductTechnicalFeaturesScreen
+import com.example.digikala.ui.screens.product_detile.ProductPriceChartScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -119,6 +120,22 @@ fun NavGraph(navController: NavHostController) {
         ) {
             it.arguments!!.getString("jsonString")?.let { jsonString ->
                 ProductTechnicalFeaturesScreen(
+                    navController = navController,
+                    jsonString = jsonString
+                )
+            }
+
+        }
+        composable(
+            ScreenPage.ProductPriceChartScreen.route + "?jsonString={jsonString}",
+            arguments = listOf(navArgument("jsonString") {
+                type = NavType.StringType
+                defaultValue = " "
+                nullable = true
+            })
+        ) {
+            it.arguments!!.getString("jsonString")?.let { jsonString ->
+                ProductPriceChartScreen(
                     navController = navController,
                     jsonString = jsonString
                 )

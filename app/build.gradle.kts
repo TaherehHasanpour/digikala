@@ -54,7 +54,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -89,7 +89,7 @@ dependencies {
     implementation("com.google.code.gson:gson:${System.getProperty("gson_version")}")
 
     //interceptor
-    implementation("com.squareup.okhttp3:logging-interceptor:${System.getProperty("okhttpInterceptor_version")}")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     //roomDB
     implementation("androidx.room:room-runtime:${System.getProperty("roomDB_version")}")
@@ -106,7 +106,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //compose navigation
-    implementation("androidx.navigation:navigation-compose:${System.getProperty("nav_version")}")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 
     //animation
     implementation("com.airbnb.android:lottie-compose:5.2.0")
@@ -132,9 +132,12 @@ dependencies {
     implementation("com.zarinpal:payment-provider-ktx:0.5.3")
 
     //paging
-    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+    //chart
+    implementation("com.patrykandpatrick.vico:compose:1.15.0")
 
-
+    //gson
+    implementation("com.google.code.gson:gson:2.9.1")
 }
 
 kapt {

@@ -10,6 +10,7 @@ sealed class ScreenPage(val route: String) {
     object Checkout : ScreenPage("Checkout-Screen")
     object ProductDetail : ScreenPage("ProductDetail-Screen")
     object ConfirmPurchase : ScreenPage("ConfirmPurchase-Screen")
+    object ProductPriceChartScreen : ScreenPage("ProductPriceChart-Screen")
     object ProductDescription : ScreenPage("ProductDescription-Screen")
     object ProductTechnicalFeatures : ScreenPage("ProductTechnicalFeatures-Screen")
     object AllProductComment : ScreenPage("AllProductComment-Screen")

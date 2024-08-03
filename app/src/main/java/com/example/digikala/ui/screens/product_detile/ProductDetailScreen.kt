@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.digikala.data.model.product_detail.Comment
 import com.example.digikala.data.model.product_detail.ImageProduct
+import com.example.digikala.data.model.product_detail.Price
 import com.example.digikala.data.model.product_detail.ProductColor
 import com.example.digikala.data.model.product_detail.ProductDetail
 import com.example.digikala.data.remote.NetworkResult
@@ -41,6 +42,7 @@ fun ProductDetailScreen(
     var imageSliderList by remember { mutableStateOf<List<ImageProduct>>(emptyList()) }
     var productColorList by remember { mutableStateOf<List<ProductColor>>(emptyList()) }
     var comments by rememberSaveable { mutableStateOf<List<Comment>>(emptyList()) }
+    var productPriceList by rememberSaveable { mutableStateOf<List<Price>>(emptyList()) }
     var categoryId by rememberSaveable { mutableStateOf("") }
     var description by rememberSaveable { mutableStateOf("") }
     var technicalFeatures by remember { mutableStateOf("") }
@@ -54,6 +56,7 @@ fun ProductDetailScreen(
                     productDetail = productDetailResult.data!!
                     imageSliderList = productDetailResult.data.imageSlider ?: emptyList()
                     productColorList = productDetailResult.data.colors ?: emptyList()
+                    productPriceList = productDetailResult.data.priceList ?: emptyList()
                     categoryId = productDetailResult.data.categoryId ?: ""
                     description = productDetailResult.data.description ?: ""
                     technicalFeatures = productDetailResult.data.technicalFeatures.toString()
@@ -82,7 +85,7 @@ fun ProductDetailScreen(
                 ProductDetailBottomBar(navController, productDetail)
             },
             topBar = {
-                ProductTopAppBar(navController)
+                ProductTopAppBar(navController,productDetail)
             }
         ) {
             LazyColumn(modifier = Modifier.padding(bottom = 70.dp)) {
