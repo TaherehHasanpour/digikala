@@ -126,9 +126,15 @@ fun ProductDetailHeaderSection(
                 modifier = Modifier.size(20.dp),
                 tint = MaterialTheme.colors.DigikalaLightGreen
             )
-
+            val percent = ((item.star?.div(0.5) ?: 0.0) * 100).toInt()
+            val user = (percent * (item.starCount?.toDouble() ?: 0.0)) / 100.toInt()
+            val textTemplate = String.format(
+                "%d (%d نفر)از خریداران این کالا را پیشنهاد کرده اند",
+                percent,
+                user
+            )
             Text(
-                text = digitByLocate(stringResource(id = R.string.mass_system)),
+                text = digitByLocate(textTemplate),
                 color = MaterialTheme.colors.semiDarkText,
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(horizontal = MaterialTheme.spacing.small)
@@ -136,8 +142,8 @@ fun ProductDetailHeaderSection(
 
         }
         Divider(
-            color= MaterialTheme.colors.grayCategory,
-            thickness= 1.dp,
+            color = MaterialTheme.colors.grayCategory,
+            thickness = 1.dp,
             modifier = Modifier.padding(localSpacing.current.medium)
         )
     }

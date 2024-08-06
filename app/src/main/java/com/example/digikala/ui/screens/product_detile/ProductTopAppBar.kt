@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.digikala.R
 import com.example.digikala.data.model.product_detail.ProductDetail
+import com.example.digikala.data.model.profile.FevItem
 import com.example.digikala.navigation.ScreenPage
 import com.example.digikala.ui.theme.darkText
 import com.example.digikala.ui.theme.spacing
@@ -49,15 +50,13 @@ import com.google.gson.Gson
 fun ProductTopAppBar(
     navController: NavController, item: ProductDetail
 ) {
-    var checkState by remember {
-        mutableStateOf(false)
-    }
+
     var expandad by remember {
         mutableStateOf(false)
     }
     val jsonPriceString = Gson().toJson(item.priceList)
 
-    val context= LocalContext.current
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,21 +95,17 @@ fun ProductTopAppBar(
                     tint = MaterialTheme.colors.darkText
                 )
             }
-            IconToggleButton(checked = checkState, onCheckedChange = {
-                checkState = !checkState
-            }) {
-                val transition =
-                    updateTransition(targetState = checkState, label = "icon transition")
-                val tint by transition.animateColor(label = "colorIcon") { isCheck ->
-                    if (isCheck) Color.Red else MaterialTheme.colors.onSurface
-                }
-                Icon(
-                    imageVector = if (checkState) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = "",
-                    tint = tint,
-                    modifier = Modifier.size(24.dp),
+            DisplayFavoriteToggleButton(
+                FevItem(
+                    item._id ?: "",
+                    item.discountPercent ?: 0,
+                    item.imageSlider?.get(0)?.image ?: "",
+                    item.name ?: "",
+                    item.price ?: 0,
+                    item.seller ?: "",
+                    item.star ?: 0.0
                 )
-            }
+            )
             IconButton(onClick = {
                 expandad = true
             }) {
@@ -158,8 +153,12 @@ fun ProductTopAppBar(
                 DropdownMenuItem(
                     onClick = {
                         expandad = false
-                        shareAppPlayStoreUrl(context,item.name!!,
-                            DigitHelper.digitByLocateAndSeparator(item.price!!.toString()),"https://www.digikala.com/")
+                        shareAppPlayStoreUrl(
+                            context,
+                            item.name!!,
+                            DigitHelper.digitByLocateAndSeparator(item.price!!.toString()),
+                            "https://www.digikala.com/"
+                        )
                     }
                 ) {
                     Row(

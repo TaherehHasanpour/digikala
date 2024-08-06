@@ -20,21 +20,21 @@ class FavoriteListViewModel @Inject constructor(private val repository: Favorite
     ViewModel() {
     val allFavoriteItems: Flow<List<FevItem>> = repository.allFavoriteItems
 
-    suspend fun addFavoriteItem(item: FevItem) {
+    fun addFavoriteItem(item: FevItem) {
         viewModelScope.launch (Dispatchers.IO){
             launch {
               repository.addFavoriteItem(item)
             }
         }
     }
-    suspend fun removeFavoriteItem(item: FevItem) {
+    fun removeFavoriteItem(item: FevItem) {
         viewModelScope.launch (Dispatchers.IO){
             launch {
                 repository.removeFavoriteItem(item)
             }
         }
     }
-    suspend fun clearFavoriteList() {
+     fun clearFavoriteList() {
         viewModelScope.launch (Dispatchers.IO){
             launch {
                 repository.clearFavoriteList()
@@ -45,6 +45,6 @@ class FavoriteListViewModel @Inject constructor(private val repository: Favorite
                return  repository.isFavoriteItemExist(id)
 
         }
-    }
+
 
 }

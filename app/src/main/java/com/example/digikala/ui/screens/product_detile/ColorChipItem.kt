@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.digikala.data.model.product_detail.ProductColor
+import com.example.digikala.ui.theme.cursorColor
 import com.example.digikala.ui.theme.darkText
 import com.example.digikala.ui.theme.localShape
 import com.example.digikala.ui.theme.localSpacing
@@ -26,15 +28,28 @@ import com.example.digikala.ui.theme.spacing
 
 @Composable
 fun ColorChipItem(
-    item: ProductColor
+    item: ProductColor,
+    isSelected: Boolean,
+    onSelectChange: (String) -> Unit
 ) {
     Surface(
         shape = localShape.current.biggerMedium,
         elevation = 1.dp,
-        modifier = Modifier.padding(MaterialTheme.spacing.extraSmall)
-    ) {
+        modifier = if (isSelected) Modifier
+            .padding(localSpacing.current.small)
+            .border(
+                1.dp, MaterialTheme.colors.cursorColor,
+                CircleShape
+            ) else Modifier.padding(localSpacing.current.small))
+     {
         Row(
-            modifier = Modifier.padding(MaterialTheme.spacing.small),
+            modifier = Modifier.toggleable(
+                value = isSelected ,
+                onValueChange ={
+                    onSelectChange(item.color)
+                }
+            )
+                .padding(MaterialTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Canvas(modifier = Modifier
