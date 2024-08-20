@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.digikala.data.model.home.AmazingItem
 import com.example.digikala.data.remote.NetworkResult
 import com.example.digikala.ui.theme.darkText
@@ -44,6 +45,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SimilarProductSection(
+    navController: NavController,
     categoryId:String,
     viewModel:ProductDetailViewModel= hiltViewModel()
 ) {
@@ -103,7 +105,7 @@ fun SimilarProductSection(
         }
         LazyRow {
             items(similarProductList) {
-                MostFavoriteProductOffer(it)
+                MostFavoriteProductOffer(navController,it)
             }
             item {
                 MostFavoriteProductShowMore()

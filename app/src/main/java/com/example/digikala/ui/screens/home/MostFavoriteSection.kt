@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.digikala.data.model.home.AmazingItem
 import com.example.digikala.data.remote.NetworkResult
 import com.example.digikala.ui.theme.darkText
@@ -34,6 +35,7 @@ import com.example.digikala.viweModels.HomeViewModel
 
 @Composable
 fun MostFavoriteSection(
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     var mostFavoriteList by remember {
@@ -88,7 +90,7 @@ fun MostFavoriteSection(
         }
         LazyRow {
             items(mostFavoriteList) {
-                MostFavoriteProductOffer(it)
+                MostFavoriteProductOffer(navController,it)
             }
             item {
                 MostFavoriteProductShowMore()

@@ -45,7 +45,9 @@ import com.example.digikala.ui.theme.unselectBottom
 import com.example.digikala.util.DigitHelper
 
 @Composable
-fun SellerInfoSection() {
+fun SellerInfoSection(
+    productPrice:Long
+) {
     Divider(
         modifier = Modifier
             .fillMaxWidth()
@@ -100,14 +102,14 @@ fun SellerInfoSection() {
                     verticalAlignment= Alignment.CenterVertically,
                 ){
                     Text(
-                        text = "${DigitHelper.digitByLocate("101")}%"+"رضایت خریداران | عملکرد",
+                        text = "${DigitHelper.digitByLocate("99")}%"+"رضایت خریداران | عملکرد",
                         color = MaterialTheme.colors.darkText,
                         style = MaterialTheme.typography.h5,
                     )
                 }
                 Divider(
                     modifier = Modifier
-                        .padding(top= localSpacing.current.small)
+                        .padding(top = localSpacing.current.small)
                         .fillMaxWidth()
                         .height(1.dp)
                         .alpha(0.2f),
@@ -314,7 +316,7 @@ fun SellerInfoSection() {
                 Text(
                     modifier = Modifier
                         .padding(vertical = MaterialTheme.spacing.small),
-                    text = "${stringResource(id = R.string.manufacturer_price)} 111 ${
+                    text = "${stringResource(id = R.string.manufacturer_price)} ${DigitHelper.digitByLocateAndSeparator(productPrice.toString())} ${
                         stringResource(
                             id = R.string.toman
                         )

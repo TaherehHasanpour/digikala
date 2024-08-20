@@ -85,17 +85,17 @@ fun ProductDetailScreen(
                 ProductDetailBottomBar(navController, productDetail)
             },
             topBar = {
-                ProductTopAppBar(navController,productDetail)
+                ProductTopAppBar(navController, productDetail)
             }
         ) {
             LazyColumn(modifier = Modifier.padding(bottom = 70.dp)) {
                 item { TopSliderProduct(imageSliderList) }
                 item { ProductDetailHeaderSection(productDetail) }
                 item { ProductSelectColorSection(productColorList) }
-                item { SellerInfoSection() }
-                item { SimilarProductSection(categoryId) }
+                item { SellerInfoSection(productDetail.price ?: 0) }
+                item { SimilarProductSection(navController,categoryId) }
                 item { ProductDescriptionSection(navController, description, technicalFeatures) }
-                item { ProductCommentsSection(navController, comments, commentCount,productId) }
+                item { ProductCommentsSection(navController, comments, commentCount, productId) }
                 item { ProductSetCommentsSection(navController, productDetail) }
             }
         }

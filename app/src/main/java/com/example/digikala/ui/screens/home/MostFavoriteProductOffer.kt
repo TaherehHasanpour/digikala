@@ -2,6 +2,7 @@ package com.example.digikala.ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,9 +31,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.digikala.R
 import com.example.digikala.data.model.home.AmazingItem
+import com.example.digikala.navigation.ScreenPage
 import com.example.digikala.ui.components.manyLogoByLang
 import com.example.digikala.ui.theme.DarkCyan
 import com.example.digikala.ui.theme.DigikalaDarkRed
@@ -45,6 +48,7 @@ import com.example.digikala.util.DigitHelper
 
 @Composable
 fun MostFavoriteProductOffer(
+    navController: NavController,
     item: AmazingItem
 ) {
     val textFromPriceWaitDiscountPercent = if (Constants.USER_LANGUAGE == Constants.ENGLISH_LNG) {
@@ -72,13 +76,17 @@ fun MostFavoriteProductOffer(
             .padding(
                 vertical = localSpacing.current.semiLarge,
                 horizontal = localSpacing.current.semiSmall
-            ),
+            )
+            .clickable {
+                navController.navigate(ScreenPage.ProductDetail.withArgs(item._id))
+            },
     ) {
         Row {
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .padding(vertical = localSpacing.current.small)
+
             ) {
                 Column(
                     modifier = Modifier

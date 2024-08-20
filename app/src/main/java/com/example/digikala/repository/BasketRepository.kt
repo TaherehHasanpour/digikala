@@ -7,6 +7,7 @@ import com.example.digikala.data.model.home.AmazingItem
 import com.example.digikala.data.remote.BaseApiResponse
 import com.example.digikala.data.remote.BasketApiInterface
 import com.example.digikala.data.remote.NetworkResult
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BasketRepository @Inject constructor(
@@ -39,6 +40,10 @@ class BasketRepository @Inject constructor(
     suspend fun changeCountItemCart(id: String, newStatus: CartStatus) {
         dao.changeStatusCart(id, newStatus)
     }
+    fun isItemExistInBasket(id: String):Flow<Boolean> =
+        dao.isItemExistInBasket(id)
+    fun getItemCountInBasket(id: String):Flow<Int> =
+        dao.getItemCountInBasket(id)
 
 
 }
