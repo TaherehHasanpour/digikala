@@ -12,7 +12,7 @@ object Constants {
     var USER_ID = "USER_ID"
     var USER_PHONE = "USER_PHONE"
     var USER_PASSWORD = "USER_PASSWORD"
-    const val BASE_URL = "https://truelearn-digikala.iran.liara.run/api/"
+    const val BASE_URL = "https://dallying-shrink-darwinism.ngrok-free.dev/api/"
     const val TIMEOUT_IN_SECOND: Long = 60
     const val API_KEY = BuildConfig.X_API_KEY
     const val KEY = BuildConfig.KEY

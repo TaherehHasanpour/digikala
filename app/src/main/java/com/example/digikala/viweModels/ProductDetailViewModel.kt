@@ -50,10 +50,10 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
         }
     }
 
-    var commentsList: Flow<PagingData<Comment>> = flow { emit(PagingData.empty())}
+    var commentsList: Flow<PagingData<Comment>> = flow { emit(PagingData.empty()) }
     fun getCommentList(productId: String) {
 
-        commentsList= Pager(
+        commentsList = Pager(
             PagingConfig(10)
         ) {
             ProductCommentsDataSource(repository, productId)

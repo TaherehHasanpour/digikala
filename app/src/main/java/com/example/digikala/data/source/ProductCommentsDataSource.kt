@@ -20,6 +20,7 @@ class ProductCommentsDataSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comment> {
+        Log.d("PAGING_DEBUG", "load() called for productId: $productId, page: ${params.key}") // لاگ
         return try {
             val nextPageNumber = params.key ?: 1
             val response = repository.getAllProductComments(

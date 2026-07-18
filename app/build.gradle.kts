@@ -81,28 +81,27 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    //retrofit
-    implementation("com.squareup.retrofit2:retrofit:${System.getProperty("retrofit_version")}")
-    implementation("com.squareup.retrofit2:converter-gson:${System.getProperty("retrofit_version")}")
+    //retrofit - نسخه‌ها را مستقیم بنویسید
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    //gson
-    implementation("com.google.code.gson:gson:${System.getProperty("gson_version")}")
+    //gson - حذف خط تکراری
+    implementation("com.google.code.gson:gson:2.10.1")
 
     //interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     //roomDB
-    implementation("androidx.room:room-runtime:${System.getProperty("roomDB_version")}")
-    implementation("androidx.room:room-ktx:${System.getProperty("roomDB_version")}")
-    annotationProcessor("androidx.room:room-compiler:${System.getProperty("roomDB_version")}")
-    kapt("androidx.room:room-compiler:${System.getProperty("roomDB_version")}")
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")  // فقط kapt کافیست، annotationProcessor را حذف کنید
 
     //datastore
-    implementation("androidx.datastore:datastore-preferences:${System.getProperty("datastore_version")}")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     //hilt
-    implementation("com.google.dagger:hilt-android:${System.getProperty("hilt_version")}")
-    kapt("com.google.dagger:hilt-android-compiler:${System.getProperty("hilt_version")}")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //compose navigation
@@ -112,32 +111,22 @@ dependencies {
     implementation("com.airbnb.android:lottie-compose:5.2.0")
 
     //coil - load image from url
-    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
-    //Accompanist-Pager
-    implementation("com.google.accompanist:accompanist-pager:0.29.0-alpha")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.29.0-alpha")
-
-    //swipe refresh
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
-
-    //system ui controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.0")
-
-    //Accompanist-Pager
-    implementation("com.google.accompanist:accompanist-pager:0.29.0-alpha")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.29.0-alpha")
+    //Accompanist
+    implementation("com.google.accompanist:accompanist-pager:0.32.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.32.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.32.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
     //zarinpal
     implementation("com.zarinpal:payment-provider-ktx:0.5.3")
 
     //paging
-    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+    implementation("androidx.paging:paging-compose:3.3.0-rc01")
+
     //chart
     implementation("com.patrykandpatrick.vico:compose:1.15.0")
-
-    //gson
-    implementation("com.google.code.gson:gson:2.9.1")
 }
 
 kapt {

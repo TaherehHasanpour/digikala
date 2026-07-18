@@ -244,7 +244,7 @@ private fun ProfileHeaderSection() {
 
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = "نام یوزر",
+        text = "طاهره حسن پور",
         textAlign = TextAlign.Center
     )
     Text(
